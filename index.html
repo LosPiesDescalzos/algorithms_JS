@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/3.2.0/mocha.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/3.2.0/mocha.js"></script>
+  <script>
+    mocha.setup('bdd');
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/3.5.0/chai.js"></script>
+  <script>
+    let assert = chai.assert;
+  </script>
+</head>
+<body>
+<script>
+  function pow(x, n) {
+      let result = 1;
+      for (let i = 0; i < n; i++) {
+          result *= x;
+      }
+      return result;
+  }
+
+  function fib(n) {
+      let a = 1;
+      let b = 1;
+      for (let i = 3; i <= n; i++) {
+          let c = a + b;
+          a = b;
+          b = c;
+      }
+      return b;
+  }
+
+  function prime_factors(n) {
+      const result = [];
+      let divisor = 2;
+      while (n >= 2) {
+          if (n % divisor === 0) {
+              result.push(divisor);
+              n /= divisor;
+          } else {
+              divisor++;
+          }
+      }
+      return result;
+  }
+
+  function quadratic_equation(a, b, c) {
+      let result1  = null; let result2 = null;
+      let dis = Math.pow(b, 2) - 4 * a * c;
+      if (dis > 0) {
+          result1 = (-b + Math.sqrt(dis)) / 2 * a;
+          result2 = (-b - Math.sqrt(dis)) / 2 * a;
+
+      } else if (dis == 0) {
+          result1 = -b / 2 * a;
+      };
+      return result1, result2;
+  }
+
+  function abs(x) {
+      let result  = null;
+      if (x >= 0) {
+          result = x;
+      } else if (x < 0) {
+          result = x * -1;
+      };
+      return result;
+  }
+
+  function point_logic(a,b,x){
+      if(x>=a && x<=b) {
+          return true;
+      }
+      else if (x<a || x>b) {
+          return false;
+      }
+  }
+
+  function swap(array, index1, index2){
+      const temp = array[index1];
+      array[index1] = array[index2];
+      array[index2] = temp;
+      return array.toString();
+  }
+
+  function isPalindrome(str) {
+      const len = str.length;
+      for (let i = 0; i < len / 2; i++) {
+          if (str[i] !== str[len - 1 - i]) {
+              return false;
+          }
+      }
+      return true;
+  }
+
+  function reverseString(str) {
+      let reversed = "";
+      for (let i = str.length - 1; i >= 0; i--) {
+          reversed += str[i];
+      }
+      return reversed;
+  }
+
+  function findMinMax(arr) {
+      let min = arr[0];
+      let max = arr[0];
+      for (let i = 1; i < arr.length; i++) {
+          if (arr[i] < min) {
+              min = arr[i];
+          } else if (arr[i] > max) {
+              max = arr[i];
+          }
+      }
+      return [min, max];
+  }
+
+  function linearSearch(per, array){
+      let result = 0;
+      for (i = 0; i < array.length; i++) {
+          if (per === array[i]) {
+              result = i;
+          }
+      }
+      return result;
+  }
+
+  function compare(a, b) {
+      return a - b;
+  }
+
+  function iterationBinarySearch(arr, x) {
+      arr.sort(compare);
+      let start = 0;
+      let end = arr.length-1;
+      while (start <= end) {
+          let mid = Math.floor((start + end) / 2);
+          if (arr[mid] === x) {
+              return mid;
+          } else if (arr[mid] < x) {
+              start = mid + 1;
+          } else {
+              end = mid - 1;
+          }
+      }
+      return -1;
+  }
+
+  function recursiveBinarySearch(arr, x, start=0, end = arr.length - 1) {
+      arr.sort(compare);
+      const mid = Math.floor((start + end) / 2);
+      if (arr[mid] === x) {
+          return mid;
+      } else if (arr[mid] <= x) {
+          return recursiveBinarySearch(arr, x, mid + 1, end);
+      } else {
+          return recursiveBinarySearch(arr, x, start, mid - 1); // если искомый элемент находится в левой половине, повторяем поиск в левой половине
+      }
+  }
+
+
+  const romanNumerals = [
+      [1000, 'M'],
+      [900, 'CM'],
+      [500, 'D'],
+      [400, 'CD'],
+      [100, 'C'],
+      [90, 'XC'],
+      [50, 'L'],
+      [40, 'XL'],
+      [10, 'X'],
+      [9, 'IX'],
+      [5, 'V'],
+      [4, 'IV'],
+      [1, 'I']
+  ];
+  function convert_to_roman(num){
+          let roman = '';
+          for (let i = 0; i < romanNumerals.length; i++) {
+              while (num >= romanNumerals[i][0]) {
+                  roman += romanNumerals[i][1];
+                  num -= romanNumerals[i][0];
+              }
+          }
+          return roman;
+  }
+
+
+</script>
+
+<div id="mocha"></div>
+<script src="index.js"></script>
+<script>
+  mocha.run();
+</script>
+</body>
+</html>
